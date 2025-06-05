@@ -92,24 +92,37 @@ You can then use `&tog_on` in place of `&tog` whenever you wish to only toggle a
 ## Conditional Layers
 
 The "conditional layers" feature enables a particular layer when all layers in a specified set are active.
-For more information, see [conditional layers](../conditional-layers.md).
+For more information, see [conditional layers](../features/conditional-layers.md).
 
-## Defines to Refer to Layers
+## Default Layer
 
-When working with layers, you may have several different key positions with bindings that enable/disable those layers.
-To make it easier to refer to those layers in your key bindings, and to change which layers are where later, you can
-add a set of `#define`s at the top of your keymap file, and use those defines in your keymap.
+?> What is the default layer?
 
-For example, if you have three layers, you can add the following to the top of your keymap:
+It is the first one you define on your keymap (unless changed using this behavior). It is _special_ in two aspects:
+
+- It can't be disabled by other behaviors.
+- It is the only one active when the board starts running.
+
+This behavior allows configuring a different default layer, for example to test DVORAK while keeping QWERTY on another layer, or moving a couple keycodes around for Windows/Mac usage.
+
+This setting is stored on a per-endpoint basis, so you can configure USB to use QWERTY, and the first BLE endpoint to use DVORAK.
+
+The stored settings are read and applied when the keyboard boots (receives powers) and also when the selected endpoint changes.
+
+### Behavior Binding
+
+- Reference: `&df`
+- Parameter: The layer number to set as default for current endpoint, e.g. `1`
+
+Example:
 
 ```dts
-#define DEFAULT 0
-#define LOWER   1
-#define RAISE   2
+&df DVORAK
 ```
 
-This allows you to use those defines, e.g. `LOWER` later in your keymap.
+For a keymap with:
 
 ```dts
-&mo LOWER  // equivalent to &mo 1
+#define QWERTY 0
+#define DVORAK 1
 ```

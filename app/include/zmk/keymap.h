@@ -32,6 +32,8 @@ typedef uint8_t zmk_keymap_layer_index_t;
 
 typedef uint32_t zmk_keymap_layers_state_t;
 
+uint8_t zmk_keymap_layer_default(void);
+int zmk_keymap_layer_set_default(uint8_t layer);
 zmk_keymap_layer_id_t zmk_keymap_layer_index_to_id(zmk_keymap_layer_index_t layer_index);
 
 zmk_keymap_layer_id_t zmk_keymap_layer_default(void);
