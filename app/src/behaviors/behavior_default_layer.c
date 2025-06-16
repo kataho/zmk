@@ -144,6 +144,7 @@ BEHAVIOR_DT_INST_DEFINE(0, behavior_default_layer_init, NULL, NULL, NULL, POST_K
 
 #endif
 
+/*
 static int endpoint_changed_cb(const zmk_event_t *eh) {
     struct zmk_endpoint_changed *evt = as_zmk_endpoint_changed(eh);
 
@@ -156,3 +157,4 @@ static int endpoint_changed_cb(const zmk_event_t *eh) {
 
 ZMK_LISTENER(endpoint, endpoint_changed_cb);
 ZMK_SUBSCRIPTION(endpoint, zmk_endpoint_changed);
+*/
