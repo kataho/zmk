@@ -40,12 +40,13 @@ static int apply_default_layer_config(struct zmk_endpoint_instance endpoint) {
     uint8_t index = zmk_endpoint_instance_to_index(endpoint);
     uint8_t layer = default_layers.endpoint_defaults[index];
 
-    int ret = zmk_keymap_layer_set_default(layer);
-    if (ret < 0) {
-        LOG_WRN("Could not apply default layer from settings. Perhaps something in the code/keymap "
-                "changed since configuration was saved.");
-        return ret;
-    }
+    zmk_keymap_layer_to(layer);
+    // int ret = zmk_keymap_layer_set_default(layer);
+    // if (ret < 0) {
+    //     LOG_WRN("Could not apply default layer from settings. Perhaps something in the code/keymap "
+    //             "changed since configuration was saved.");
+    //     return ret;
+    // }
 
     LOG_INF("Activated default layer (%d) for the current endpoint.", layer);
     return 0;
@@ -144,7 +145,7 @@ BEHAVIOR_DT_INST_DEFINE(0, behavior_default_layer_init, NULL, NULL, NULL, POST_K
 
 #endif
 
-/*
+
 static int endpoint_changed_cb(const zmk_event_t *eh) {
     struct zmk_endpoint_changed *evt = as_zmk_endpoint_changed(eh);
 
@@ -157,4 +158,3 @@ static int endpoint_changed_cb(const zmk_event_t *eh) {
 
 ZMK_LISTENER(endpoint, endpoint_changed_cb);
 ZMK_SUBSCRIPTION(endpoint, zmk_endpoint_changed);
-*/
